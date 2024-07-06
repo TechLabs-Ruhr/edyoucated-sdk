@@ -1,0 +1,41 @@
+query SearchPersonalizedLearningPaths_v2(
+  $filter: SearchablePersonalizedLearningPathFilterInput
+  $sort: [SearchablePersonalizedLearningPathSortInput]
+  $limit: Int
+  $nextToken: [String]
+) {
+  searchPersonalizedLearningPaths_v2(
+    filter: $filter
+    sort: $sort
+    limit: $limit
+    nextToken: $nextToken
+  ) {
+    items {
+      title
+      userId
+      user {
+        id
+        name
+        givenName
+        familyName
+        picture
+        email
+      }
+      originId
+      lastProgressMadeAt
+      progress {
+        skillCountTotal
+        skillCountMastered
+        skillCountMasteredPercentage
+        materialDurationMinutesTotal
+        materialDurationMinutesCompleted
+        materialDurationCompletedPercentage
+        materialCountTotal
+        materialCountCompleted
+        materialCountCompletedPercentage
+      }
+    }
+    nextToken
+    total
+  }
+}

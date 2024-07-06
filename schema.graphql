@@ -1,0 +1,124 @@
+type Query {
+  searchPersonalizedLearningPaths_v2(
+    filter: SearchablePersonalizedLearningPathFilterInput
+    sort: [SearchablePersonalizedLearningPathSortInput]
+    limit: Int
+    nextToken: [String]
+  ): SearchablePersonalizedLearningPathResult_v2
+  listTeamsByTeamTeamOrganizationId(
+    teamTeamOrganizationId: String
+    limit: Int
+    nextToken: String
+  ): ListTeamsByTeamTeamOrganizationIdResult
+}
+
+input SearchablePersonalizedLearningPathFilterInput {
+  and: [SearchablePersonalizedLearningPathFilterInput]
+  or: [SearchablePersonalizedLearningPathFilterInput]
+  contextOrganizationId: SearchablePersonalizedLearningPathFilterInput
+  eq: String
+  userId: SearchablePersonalizedLearningPathFilterInput
+}
+
+type ListTeamsByTeamTeamOrganizationIdResult {
+  items: [ListTeamsByTeamTeamOrganizationIdItem]
+  nextToken: String
+}
+
+type ListTeamsByTeamTeamOrganizationIdItem {
+  id: ID!
+  name: String!
+  teamTeamOrganizationId: String!
+  members: MemberType
+}
+
+type SearchablePersonalizedLearningPathResult_v2 {
+  items: [SearchablePersonalizedLearningPath_v2]
+  nextToken: [String]
+  total: String
+}
+
+type SearchablePersonalizedLearningPath_v2 {
+  title: String
+  userId: String
+  user: User
+  originId: String
+  lastProgressMadeAt: String
+  progress: SearchablePersonalizedLearningPathProgress_v2
+}
+
+type SearchablePersonalizedLearningPathProgress_v2 {
+  skillCountTotal: String
+  skillCountMastered: String
+  skillCountMasteredPercentage: String
+  materialDurationMinutesTotal: String
+  materialDurationMinutesCompleted: String
+  materialDurationCompletedPercentage: String
+  materialCountTotal: String
+  materialCountCompleted: String
+  materialCountCompletedPercentage: String
+}
+
+input SearchablePersonalizedLearningPathFilterInput {
+  and: [SearchablePersonalizedLearningPathFilterInput]
+  or: [SearchablePersonalizedLearningPathFilterInput]
+  contextOrganizationId: SearchablePersonalizedLearningPathFilterInput
+  eq: String
+  userId: SearchablePersonalizedLearningPathFilterInput
+}
+
+input SearchablePersonalizedLearningPathSortInput {
+  field: String
+  direction: String
+}
+
+type Organization {
+  teams: TeamItem
+}
+
+type TeamItem {
+  items: [Team]
+}
+
+type Team {
+  id: ID!
+  name: String!
+  members: [MemberType]
+}
+
+type MemberType {
+  items: [Member]
+}
+
+type Member {
+  id: ID!
+  user: User
+  roles: [String]
+}
+
+type User {
+  id: ID!
+  name: String!
+  picture: String
+  email: String
+  givenName: String
+  familyName: String
+}
+
+type ListTrackProgresss {
+  items: [ModelTrackProgress]
+  nextToken: String
+}
+
+input ModelTrackProgressFilterInput {
+  or: [ModelTrackProgressFilterInput]
+  and: [ModelTrackProgressFilterInput]
+  user: ModelTrackProgressFilterInput
+  contextOrganizationId: ModelTrackProgressFilterInput
+  eq: String
+}
+
+type ModelTrackProgress {
+  user: String!
+  duration_finished: Int!
+}

@@ -1,0 +1,29 @@
+query ListTeamsByTeamTeamOrganizationId(
+  $teamTeamOrganizationId: String
+  $limit: Int
+  $nextToken: String
+) {
+  listTeamsByTeamTeamOrganizationId(
+    teamTeamOrganizationId: $teamTeamOrganizationId
+    limit: $limit
+    nextToken: $nextToken
+  ) {
+    items {
+      id
+      name
+      teamTeamOrganizationId
+      members {
+        items {
+          id
+          roles
+          user {
+            id
+            givenName
+            familyName
+          }
+        }
+      }
+    }
+    nextToken
+  }
+}
